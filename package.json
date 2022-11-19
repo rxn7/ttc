@@ -1,0 +1,18 @@
+{
+    "name": "ttc",
+    "version": "1.0.0",
+    "description": "Tic-Tac-Toe game written in Typescript as a static website",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rxn7/ttc.git"
+    },
+    "keywords": [
+        "typescript"
+    ],
+    "author": "rxn7",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rxn7/ttc/issues"
+    },
+    "homepage": "https://github.com/rxn7/ttc#readme"
+}
