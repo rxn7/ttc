@@ -3,40 +3,98 @@ body {
     margin: 0;
 
     text-align: center;
-    font-family: monospace;
+    font-family: 'Courier New';
     color: #fff;
     font-size: 30px;
 }
 
-#gridContainer {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+#flexContainer {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.gridBtn {
-    width: 100px;
-    height: 100px;
-    color: gray;
-    border: 1px solid #555;
-    background-color: rgb(109, 109, 109);
+#boardContainer {
+    gap: 0;
+    margin: 0 auto;
+    width: 85%;
+    max-width: 400px;
+    max-height: 400px;
+    border-spacing: 0;
 }
 
-.gridBtn:disabled {
-    font-size: 60px;
-    color: black;
-    background-color: rgb(129, 129, 129);
+#boardContainer td {
+    position: relative;
+    width: 33.3%;
+    height: 33.3%;
+    max-height: 100px !important;
+    border: 5px solid #555;
+    user-select: none;
+    font-size: 50px;
 }
 
-.gridBtnX {
-    color: greenyellow !important;
+@media screen and (max-width: 420px) {
+    #boardContainer td {
+        font-size: 40px;
+    }
 }
 
-.gridBtnO {
-    color: cyan !important;
+@media screen and (max-width: 270px) {
+    #boardContainer td {
+        font-size: 30px;
+    }
 }
 
-.gridBtnWinning {
-    color: green !important;
+#boardContainer td::before {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#boardContainer td[sign='O'] {
+    color: greenyellow;
+}
+
+#boardContainer td[sign='O']::before {
+    content: 'O';
+}
+
+#boardContainer td[sign='X'] {
+    color: red;
+}
+
+#boardContainer td[sign='X']::before {
+    content: 'X';
+}
+
+#boardContainer td:hover {
+    border-color: #eee;
+}
+
+#boardContainer td:after {
+    content: '';
+    display: block;
+    margin-top: 100%;
+}
+
+#boardContainer td:first-of-type {
+    border-left-color: transparent;
+}
+
+#boardContainer td:last-of-type {
+    border-right-color: transparent;
+}
+
+#boardContainer tr:first-of-type td {
+    border-top-color: transparent;
+}
+
+#boardContainer tr:last-of-type td {
+    border-bottom-color: transparent;
 }

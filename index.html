@@ -7,10 +7,30 @@
         <title>ttc</title>
     </head>
     <body>
-        <p id="turnText"></p>
-        <p id="winCountText"></p>
-        <div id="gridContainer"></div>
+        <div id="flexContainer">
+            <p id="turnText"></p>
 
-        <script type="module" src="out/index.js"></script>
+            <table id="boardContainer">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <p id="winCountText"></p>
+        </div>
+
+        <script type="module" src="out/ttc.js"></script>
     </body>
 </html>
