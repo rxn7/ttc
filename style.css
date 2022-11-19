@@ -1,0 +1,42 @@
+body {
+    background-color: #282828;
+    margin: 0;
+
+    text-align: center;
+    font-family: monospace;
+    color: #fff;
+    font-size: 30px;
+}
+
+#gridContainer {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+}
+
+.gridBtn {
+    width: 100px;
+    height: 100px;
+    color: gray;
+    border: 1px solid #555;
+    background-color: rgb(109, 109, 109);
+}
+
+.gridBtn:disabled {
+    font-size: 60px;
+    color: black;
+    background-color: rgb(129, 129, 129);
+}
+
+.gridBtnX {
+    color: greenyellow !important;
+}
+
+.gridBtnO {
+    color: cyan !important;
+}
+
+.gridBtnWinning {
+    color: green !important;
+}
