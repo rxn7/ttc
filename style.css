@@ -1,3 +1,8 @@
+:root {
+    --xPlayerColor: #fff;
+    --oPlayerColor: #fff;
+}
+
 body {
     background-color: #282828;
     margin: 0;
@@ -58,7 +63,7 @@ body {
 }
 
 #boardContainer td[sign='O'] {
-    color: greenyellow;
+    color: var(--oPlayerColor);
 }
 
 #boardContainer td[sign='O']::before {
@@ -66,7 +71,7 @@ body {
 }
 
 #boardContainer td[sign='X'] {
-    color: red;
+    color: var(--xPlayerColor);
 }
 
 #boardContainer td[sign='X']::before {

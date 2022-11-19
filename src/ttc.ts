@@ -3,8 +3,8 @@ import { playClickAudio, playTieAudio, playWinAudio } from './audio.js'
 const turnText: HTMLParagraphElement = document.getElementById('turnText') as HTMLParagraphElement
 const winCountText: HTMLParagraphElement = document.getElementById('winCountText') as HTMLParagraphElement
 
-const PLAYER_O_COLOR: string = `greenyellow`
-const PLAYER_X_COLOR: string = `red`
+const PLAYER_O_COLOR: string = `#faf`
+const PLAYER_X_COLOR: string = `#0fa`
 
 const combos: number[][] = [
     [0, 1, 2],
@@ -121,3 +121,6 @@ function onTie(): void {
 }
 
 initBoard()
+
+document.documentElement.style.setProperty('--xPlayerColor', PLAYER_X_COLOR)
+document.documentElement.style.setProperty('--oPlayerColor', PLAYER_O_COLOR)
