@@ -2,7 +2,7 @@ import { playClickAudio, playTieAudio, playWinAudio } from './audio.js';
 import './style.js';
 const statusText = document.getElementById('statusText');
 const winCountText = document.getElementById('winCountText');
-const winLine = document.getElementById('winLine');
+const winningComboLine = document.getElementById('winningComboLine');
 const PLAYER_O_COLOR = `#faf`;
 const PLAYER_X_COLOR = `#0fa`;
 const TIE_COLOR = `#ffa`;
@@ -31,7 +31,7 @@ function initBoard() {
     updateTurnText();
     updateWinCountText();
     updateCssTurnVariable();
-    winLine.removeAttribute('type');
+    winningComboLine.removeAttribute('type');
     if (!cells) {
         cells = Array.from(document.querySelectorAll('#boardContainer td'));
         cells.forEach((cell, i) => {
@@ -70,7 +70,7 @@ function updateCssTurnVariable() {
     }
 }
 function setWinLineType(idx) {
-    winLine.setAttribute('type', winLineTypes[idx]);
+    winningComboLine.setAttribute('type', winLineTypes[idx]);
 }
 function checkWinner() {
     let i = 0;
