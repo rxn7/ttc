@@ -1,6 +1,7 @@
 :root {
     --xPlayerColor: #fff;
     --oPlayerColor: #fff;
+    --turn: '';
 }
 
 body {
@@ -25,8 +26,8 @@ body {
 #boardContainer {
     position: relative;
     margin: 0 auto;
+    aspect-ratio: 1 / 1;
     width: 85%;
-    height: 100%;
     max-width: 400px;
     max-height: 400px;
 }
@@ -89,13 +90,12 @@ body {
 }
 
 #boardTable td:hover {
-    border-color: #eee;
+    border-color: #777;
 }
 
-#boardTable td:after {
-    content: '';
-    display: block;
-    margin-top: 100%;
+#boardTable td:not([sign]):hover::before {
+    content: var(--turn);
+    opacity: 0.4;
 }
 
 #boardTable td:first-of-type {

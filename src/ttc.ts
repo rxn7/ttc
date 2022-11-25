@@ -33,12 +33,13 @@ let tieCount: number = 0
 let inputBlocked: boolean = false
 
 function initBoard(): void {
-    updateTurnText()
-    updateWinCountText()
-    winLine.removeAttribute('type')
-
     inputBlocked = false
     cellsFilled = 0
+
+    updateTurnText()
+    updateWinCountText()
+    updateCssTurnVariable()
+    winLine.removeAttribute('type')
 
     if (!cells) {
         cells = Array.from(document.querySelectorAll('#boardContainer td'))
@@ -75,7 +76,16 @@ function flipTurn(): void {
     updateTurnText()
 }
 
-function setWinLine(idx: number) {
+function updateCssTurnVariable() {
+    if (inputBlocked) {
+        document.documentElement.style.setProperty('--turn', '')
+    } else {
+        /* for some reason it doesnt work when it's 'turn as string' or just 'turn' */
+        document.documentElement.style.setProperty('--turn', JSON.stringify(turn))
+    }
+}
+
+function setWinLineType(idx: number) {
     winLine.setAttribute('type', winLineTypes[idx])
 }
 
@@ -84,7 +94,7 @@ function checkWinner(): Player {
     for (let combo of combos) {
         let [a, b, c] = combo
         if (board[a] !== false && board[a] === board[b] && board[b] === board[c]) {
-            setWinLine(i)
+            setWinLineType(i)
             return board[a]
         }
 
@@ -108,6 +118,13 @@ function onCellClick(cell: HTMLTableCellElement, idx: number): void {
 
     if (winner) onWin(winner)
     else if (++cellsFilled == 9) onTie()
+
+    updateCssTurnVariable()
+}
+
+function scheduleRestart(): void {
+    inputBlocked = true
+    setTimeout(initBoard, 3000)
 }
 
 function onWin(winner: Player): void {
@@ -115,25 +132,20 @@ function onWin(winner: Player): void {
     else oWinCount++
 
     updateWinCountText()
+    playWinAudio()
+    scheduleRestart()
 
     statusText.innerHTML = `<span style="font-weight: bold; color: ${getPlayerColor(winner)}">${winner}</span> wins!`
-    inputBlocked = true
-
-    playWinAudio()
-
-    setTimeout(initBoard, 3000)
 }
 
 function onTie(): void {
     tieCount++
+
     updateWinCountText()
+    playTieAudio()
+    scheduleRestart()
 
     statusText.innerHTML = `It's a <span style="font-weight: bold; color: ${TIE_COLOR}">/ tie</span>!`
-    inputBlocked = true
-
-    playTieAudio()
-
-    setTimeout(initBoard, 3000)
 }
 
 initBoard()
