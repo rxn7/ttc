@@ -28,9 +28,13 @@ let turn: Player = 'O'
 let cells: HTMLTableCellElement[]
 let board: Player[] = new Array<Player>(9)
 let cellsFilled: number = 0
-let xWinCount: number = 0
-let oWinCount: number = 0
-let tieCount: number = 0
+
+let score = {
+    O: 0,
+    X: 0,
+    tie: 0,
+}
+
 let inputBlocked: boolean = false
 
 function initBoard(): void {
@@ -41,13 +45,6 @@ function initBoard(): void {
     updateWinCountText()
     updateCssTurnVariable()
     winningComboLine.removeAttribute('type')
-
-    if (!cells) {
-        cells = Array.from(document.querySelectorAll('#boardContainer td'))
-        cells.forEach((cell, i) => {
-            cell.addEventListener('click', () => onCellClick(cell, i))
-        })
-    }
 
     cells.forEach((cell, i) => {
         cell.removeAttribute('sign')
@@ -67,9 +64,9 @@ function updateTurnText(): void {
 }
 
 function updateWinCountText(): void {
-    winCountText.innerHTML = `<span style="font-weight: bold; color: ${PLAYER_O_COLOR}">O</span> wins: ${oWinCount}<br>`
-    winCountText.innerHTML += `<span style="font-weight: bold; color: ${PLAYER_X_COLOR}">X</span> wins: ${xWinCount}<br>`
-    winCountText.innerHTML += `<span style="font-weight: bold; color: ${TIE_COLOR}">/</span> ties: ${tieCount}`
+    winCountText.innerHTML = `<span style="font-weight: bold; color: ${PLAYER_O_COLOR}">O</span> wins: ${score.O}<br>`
+    winCountText.innerHTML += `<span style="font-weight: bold; color: ${PLAYER_X_COLOR}">X</span> wins: ${score.X}<br>`
+    winCountText.innerHTML += `<span style="font-weight: bold; color: ${TIE_COLOR}">/</span> ties: ${score.tie}`
 }
 
 function flipTurn(): void {
@@ -129,8 +126,9 @@ function scheduleRestart(): void {
 }
 
 function onWin(winner: Player): void {
-    if (winner === 'X') xWinCount++
-    else oWinCount++
+    if (!winner) return
+
+    score[winner]++
 
     updateWinCountText()
     playWinAudio()
@@ -140,7 +138,7 @@ function onWin(winner: Player): void {
 }
 
 function onTie(): void {
-    tieCount++
+    score.tie++
 
     updateWinCountText()
     playTieAudio()
@@ -149,7 +147,12 @@ function onTie(): void {
     statusText.innerHTML = `It's a <span style="font-weight: bold; color: ${TIE_COLOR}">/ tie</span>!`
 }
 
-initBoard()
-
 document.documentElement.style.setProperty('--xPlayerColor', PLAYER_X_COLOR)
 document.documentElement.style.setProperty('--oPlayerColor', PLAYER_O_COLOR)
+
+cells = Array.from(document.querySelectorAll('#boardContainer td'))
+cells.forEach((cell, i) => {
+    cell.addEventListener('click', () => onCellClick(cell, i))
+})
+
+initBoard()
