@@ -1,4 +1,5 @@
 import { playClickAudio, playTieAudio, playWinAudio } from './audio.js';
+import './style.js';
 const statusText = document.getElementById('statusText');
 const winCountText = document.getElementById('winCountText');
 const winLine = document.getElementById('winLine');
