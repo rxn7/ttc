@@ -2,9 +2,11 @@
 
 set -e
 
-npx tsc --project $(pwd)
 mkdir -p build
+npx tsc --project $(pwd)
 cp -r static/* build
-cp -r out build
+
+# Optimize css
+tr --delete '\n' < static/style.css > build/style.css
 
 echo -e "\e[1;32mProject has been successfuly built!\e[0m"

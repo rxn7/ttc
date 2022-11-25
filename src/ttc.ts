@@ -1,10 +1,14 @@
 import { playClickAudio, playTieAudio, playWinAudio } from './audio.js'
 
-const turnText: HTMLParagraphElement = document.getElementById('turnText') as HTMLParagraphElement
+type Player = 'X' | 'O' | false
+
+const statusText: HTMLParagraphElement = document.getElementById('statusText') as HTMLParagraphElement
 const winCountText: HTMLParagraphElement = document.getElementById('winCountText') as HTMLParagraphElement
+const winLine: HTMLDivElement = document.getElementById('winLine') as HTMLDivElement
 
 const PLAYER_O_COLOR: string = `#faf`
 const PLAYER_X_COLOR: string = `#0fa`
+const TIE_COLOR: string = `#ffa`
 
 const combos: number[][] = [
     [0, 1, 2],
@@ -17,12 +21,12 @@ const combos: number[][] = [
     [2, 4, 6],
 ]
 
-type Player = 'X' | 'O' | false
+const winLineTypes: string[] = ['R1', 'R2', 'R3', 'C1', 'C2', 'C3', 'D1', 'D2']
 
 let turn: Player = 'O'
 let cells: HTMLTableCellElement[]
 let board: Player[] = new Array<Player>(9)
-let btnClickCounter: number = 0
+let cellsFilled: number = 0
 let xWinCount: number = 0
 let oWinCount: number = 0
 let tieCount: number = 0
@@ -31,9 +35,10 @@ let inputBlocked: boolean = false
 function initBoard(): void {
     updateTurnText()
     updateWinCountText()
+    winLine.removeAttribute('type')
 
     inputBlocked = false
-    btnClickCounter = 0
+    cellsFilled = 0
 
     if (!cells) {
         cells = Array.from(document.querySelectorAll('#boardContainer td'))
@@ -56,13 +61,13 @@ function getPlayerColor(player: Player) {
 }
 
 function updateTurnText(): void {
-    turnText.innerHTML = `Turn: <span style="font-weight: bold; color: ${getPlayerColor(turn)}">${turn}</span>`
+    statusText.innerHTML = `Turn: <span style="font-weight: bold; color: ${getPlayerColor(turn)}">${turn}</span>`
 }
 
 function updateWinCountText(): void {
     winCountText.innerHTML = `<span style="font-weight: bold; color: ${PLAYER_O_COLOR}">O</span> wins: ${oWinCount}<br>`
     winCountText.innerHTML += `<span style="font-weight: bold; color: ${PLAYER_X_COLOR}">X</span> wins: ${xWinCount}<br>`
-    winCountText.innerHTML += `ties: ${tieCount}`
+    winCountText.innerHTML += `<span style="font-weight: bold; color: ${TIE_COLOR}">/</span> ties: ${tieCount}`
 }
 
 function flipTurn(): void {
@@ -70,10 +75,20 @@ function flipTurn(): void {
     updateTurnText()
 }
 
+function setWinLine(idx: number) {
+    winLine.setAttribute('type', winLineTypes[idx])
+}
+
 function checkWinner(): Player {
+    let i: number = 0
     for (let combo of combos) {
         let [a, b, c] = combo
-        if (board[a] !== false && board[a] === board[b] && board[b] === board[c]) return board[a]
+        if (board[a] !== false && board[a] === board[b] && board[b] === board[c]) {
+            setWinLine(i)
+            return board[a]
+        }
+
+        ++i
     }
 
     return false
@@ -90,8 +105,9 @@ function onCellClick(cell: HTMLTableCellElement, idx: number): void {
     flipTurn()
 
     const winner: Player = checkWinner()
+
     if (winner) onWin(winner)
-    else if (++btnClickCounter == 9) onTie()
+    else if (++cellsFilled == 9) onTie()
 }
 
 function onWin(winner: Player): void {
@@ -100,7 +116,7 @@ function onWin(winner: Player): void {
 
     updateWinCountText()
 
-    turnText.innerHTML = `<span style="font-weight: bold; color: ${getPlayerColor(winner)}">${winner}</span> wins!`
+    statusText.innerHTML = `<span style="font-weight: bold; color: ${getPlayerColor(winner)}">${winner}</span> wins!`
     inputBlocked = true
 
     playWinAudio()
@@ -112,7 +128,7 @@ function onTie(): void {
     tieCount++
     updateWinCountText()
 
-    turnText.textContent = `It's a tie!`
+    statusText.innerHTML = `It's a <span style="font-weight: bold; color: ${TIE_COLOR}">/ tie</span>!`
     inputBlocked = true
 
     playTieAudio()

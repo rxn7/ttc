@@ -23,15 +23,22 @@ body {
 }
 
 #boardContainer {
-    gap: 0;
+    position: relative;
     margin: 0 auto;
     width: 85%;
+    height: 100%;
     max-width: 400px;
     max-height: 400px;
+}
+
+#boardTable {
+    width: 100%;
+    height: 100%;
+    gap: 0;
     border-spacing: 0;
 }
 
-#boardContainer td {
+#boardTable td {
     position: relative;
     width: 33.3%;
     height: 33.3%;
@@ -42,64 +49,130 @@ body {
 }
 
 @media screen and (max-width: 420px) {
-    #boardContainer td {
+    #boardTable td {
         font-size: 40px;
     }
 }
 
 @media screen and (max-width: 270px) {
-    #boardContainer td {
+    #boardTable td {
         font-size: 30px;
     }
 }
 
-#boardContainer td::before {
+#boardTable td::before {
+    vertical-align: middle;
     margin: 0;
     padding: 0;
+    align-content: center;
+    justify-content: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#boardContainer td[sign='O'] {
+#boardTable td[sign='O'] {
     color: var(--oPlayerColor);
 }
 
-#boardContainer td[sign='O']::before {
+#boardTable td[sign='O']::before {
     content: 'O';
 }
 
-#boardContainer td[sign='X'] {
+#boardTable td[sign='X'] {
     color: var(--xPlayerColor);
 }
 
-#boardContainer td[sign='X']::before {
+#boardTable td[sign='X']::before {
     content: 'X';
 }
 
-#boardContainer td:hover {
+#boardTable td:hover {
     border-color: #eee;
 }
 
-#boardContainer td:after {
+#boardTable td:after {
     content: '';
     display: block;
     margin-top: 100%;
 }
 
-#boardContainer td:first-of-type {
+#boardTable td:first-of-type {
     border-left-color: transparent;
 }
 
-#boardContainer td:last-of-type {
+#boardTable td:last-of-type {
     border-right-color: transparent;
 }
 
-#boardContainer tr:first-of-type td {
+#boardTable tr:first-of-type td {
     border-top-color: transparent;
 }
 
-#boardContainer tr:last-of-type td {
+#boardTable tr:last-of-type td {
     border-bottom-color: transparent;
+}
+
+#winLine {
+    --thickness: 4px;
+    --halfThickness: calc(var(--thickness) * 0.5);
+    --offset1: calc(16.66% - var(--halfThickness));
+    --offset2: calc(50% - var(--halfThickness));
+    --offset3: calc(83.33% - var(--halfThickness));
+    position: absolute;
+    background-color: greenyellow;
+}
+
+#winLine[type='R1'] {
+    width: 100%;
+    height: var(--thickness);
+    top: var(--offset1);
+}
+
+#winLine[type='R2'] {
+    width: 100%;
+    height: var(--thickness);
+    top: var(--offset2);
+}
+
+#winLine[type='R3'] {
+    width: 100%;
+    height: var(--thickness);
+    top: var(--offset3);
+}
+
+#winLine[type='C1'] {
+    height: 100%;
+    width: var(--thickness);
+    top: 0;
+    left: var(--offset1);
+}
+
+#winLine[type='C2'] {
+    height: 100%;
+    width: var(--thickness);
+    top: 0;
+    left: var(--offset2);
+}
+
+#winLine[type='C3'] {
+    height: 100%;
+    width: var(--thickness);
+    top: 0;
+    left: var(--offset3);
+}
+
+#winLine[type='D1'] {
+    width: 100%;
+    height: var(--thickness);
+    top: 50%;
+    transform: skewY(45deg);
+}
+
+#winLine[type='D2'] {
+    width: 100%;
+    height: var(--thickness);
+    top: 50%;
+    transform: skewY(-45deg);
 }
