@@ -15,5 +15,3 @@ Tic-Tac-Toe game written in Typescript as a static website
 -   AI enemy
 
 -   Multiple themes
-
--   Cell preview on hover
