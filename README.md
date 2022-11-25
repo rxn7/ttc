@@ -1,6 +1,6 @@
 # ttc
 
-Tic-Tac-Toe game written in Typescript as a static website
+Tic-Tac-Toe game made using TS/HTML/CSS
 
 # Screenshots
 
