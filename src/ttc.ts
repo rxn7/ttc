@@ -5,7 +5,7 @@ type Player = 'X' | 'O' | false
 
 const statusText: HTMLParagraphElement = document.getElementById('statusText') as HTMLParagraphElement
 const winCountText: HTMLParagraphElement = document.getElementById('winCountText') as HTMLParagraphElement
-const winLine: HTMLDivElement = document.getElementById('winLine') as HTMLDivElement
+const winningComboLine: HTMLDivElement = document.getElementById('winningComboLine') as HTMLDivElement
 
 const PLAYER_O_COLOR: string = `#faf`
 const PLAYER_X_COLOR: string = `#0fa`
@@ -40,7 +40,7 @@ function initBoard(): void {
     updateTurnText()
     updateWinCountText()
     updateCssTurnVariable()
-    winLine.removeAttribute('type')
+    winningComboLine.removeAttribute('type')
 
     if (!cells) {
         cells = Array.from(document.querySelectorAll('#boardContainer td'))
@@ -87,7 +87,7 @@ function updateCssTurnVariable() {
 }
 
 function setWinLineType(idx: number) {
-    winLine.setAttribute('type', winLineTypes[idx])
+    winningComboLine.setAttribute('type', winLineTypes[idx])
 }
 
 function checkWinner(): Player {

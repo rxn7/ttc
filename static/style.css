@@ -104,7 +104,7 @@ body {
     border-bottom-color: transparent;
 }
 
-#winLine {
+#winningComboLine {
     --thickness: calc(var(--cellBorderWidth) * 2);
     --halfThickness: calc(var(--thickness) * 0.5);
     --offset1: calc(16.66% - var(--halfThickness));
@@ -114,53 +114,53 @@ body {
     background-color: greenyellow;
 }
 
-#winLine[type='R1'] {
+#winningComboLine[type='R1'] {
     width: 100%;
     height: var(--thickness);
     top: var(--offset1);
 }
 
-#winLine[type='R2'] {
+#winningComboLine[type='R2'] {
     width: 100%;
     height: var(--thickness);
     top: var(--offset2);
 }
 
-#winLine[type='R3'] {
+#winningComboLine[type='R3'] {
     width: 100%;
     height: var(--thickness);
     top: var(--offset3);
 }
 
-#winLine[type='C1'] {
+#winningComboLine[type='C1'] {
     height: 100%;
     width: var(--thickness);
     top: 0;
     left: var(--offset1);
 }
 
-#winLine[type='C2'] {
+#winningComboLine[type='C2'] {
     height: 100%;
     width: var(--thickness);
     top: 0;
     left: var(--offset2);
 }
 
-#winLine[type='C3'] {
+#winningComboLine[type='C3'] {
     height: 100%;
     width: var(--thickness);
     top: 0;
     left: var(--offset3);
 }
 
-#winLine[type='D1'] {
+#winningComboLine[type='D1'] {
     width: 100%;
     height: var(--thickness);
     top: 50%;
     transform: skewY(45deg);
 }
 
-#winLine[type='D2'] {
+#winningComboLine[type='D2'] {
     width: 100%;
     height: var(--thickness);
     top: 50%;
