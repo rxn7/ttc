@@ -105,7 +105,7 @@ body {
 }
 
 #winLine {
-    --thickness: 4px;
+    --thickness: calc(var(--cellBorderWidth) * 2);
     --halfThickness: calc(var(--thickness) * 0.5);
     --offset1: calc(16.66% - var(--halfThickness));
     --offset2: calc(50% - var(--halfThickness));
