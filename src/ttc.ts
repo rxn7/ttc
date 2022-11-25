@@ -1,4 +1,5 @@
 import { playClickAudio, playTieAudio, playWinAudio } from './audio.js'
+import './style.js'
 
 type Player = 'X' | 'O' | false
 

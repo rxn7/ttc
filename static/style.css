@@ -2,6 +2,8 @@
     --xPlayerColor: #fff;
     --oPlayerColor: #fff;
     --turn: '';
+    --cellBorderWidth: 10px;
+    --cellTextSize: 50px;
 }
 
 body {
@@ -44,21 +46,9 @@ body {
     width: 33.3%;
     height: 33.3%;
     max-height: 100px !important;
-    border: 5px solid #555;
+    border: var(--cellBorderWidth) solid #555;
     user-select: none;
-    font-size: 50px;
-}
-
-@media screen and (max-width: 420px) {
-    #boardTable td {
-        font-size: 40px;
-    }
-}
-
-@media screen and (max-width: 270px) {
-    #boardTable td {
-        font-size: 30px;
-    }
+    font-size: var(--cellTextSize);
 }
 
 #boardTable td::before {
