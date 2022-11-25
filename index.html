@@ -8,29 +8,32 @@
     </head>
     <body>
         <div id="flexContainer">
-            <p id="turnText"></p>
+            <p id="statusText"></p>
 
-            <table id="boardContainer">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
+            <div id="boardContainer">
+                <table id="boardTable">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div id="winLine"></div>
+            </div>
 
             <p id="winCountText"></p>
         </div>
 
-        <script type="module" src="out/ttc.js"></script>
+        <script type="module" src="src/ttc.js"></script>
     </body>
 </html>
