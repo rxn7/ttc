@@ -54,9 +54,14 @@ function initBoard(): void {
 }
 
 function getPlayerColor(player: Player) {
-    if (player === 'O') return PLAYER_O_COLOR
-
-    return PLAYER_X_COLOR
+    switch (player) {
+        case 'O':
+            return PLAYER_O_COLOR
+        case 'X':
+            return PLAYER_X_COLOR
+        case false:
+            return ''
+    }
 }
 
 function updateTurnText(): void {
@@ -90,7 +95,7 @@ function setWinLineType(idx: number) {
 function checkWinner(): Player {
     let i: number = 0
     for (let combo of combos) {
-        let [a, b, c] = combo
+        const [a, b, c]: number[] = combo
         if (board[a] !== false && board[a] === board[b] && board[b] === board[c]) {
             setWinLineType(i)
             return board[a]
@@ -114,8 +119,11 @@ function onCellClick(cell: HTMLTableCellElement, idx: number): void {
 
     const winner: Player = checkWinner()
 
-    if (winner) onWin(winner)
-    else if (++cellsFilled == 9) onTie()
+    if (winner) {
+        onWin(winner)
+    } else if (++cellsFilled == 9) {
+        onTie()
+    }
 
     updateCssTurnVariable()
 }
