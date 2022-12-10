@@ -156,13 +156,13 @@ body {
 #winningComboLine[type='D1'] {
     width: 100%;
     height: var(--thickness);
-    top: 50%;
+    top: calc(50% - var(--halfThickness));
     transform: skewY(45deg);
 }
 
 #winningComboLine[type='D2'] {
     width: 100%;
     height: var(--thickness);
-    top: 50%;
+    top: calc(50% - var(--halfThickness));
     transform: skewY(-45deg);
 }
